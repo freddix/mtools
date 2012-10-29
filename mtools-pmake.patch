@@ -1,0 +1,61 @@
+--- mtools-3.9.10/Makefile.in.orig	2006-11-16 10:46:14.932494500 +0000
++++ mtools-3.9.10/Makefile.in	2006-11-16 11:52:29.305999750 +0000
+@@ -194,8 +194,7 @@
+ 	$(TEXI2HTML) $<
+ 
+ # Don't cd, to avoid breaking install-sh references.
+-install-info: info
+-	$(top_srcdir)/mkinstalldirs $(DESTDIR)$(infodir)
++install-info: info installdirs
+ 	if test -f mtools.info; then \
+ 	  for i in mtools.info*; do \
+ 	    $(INSTALL_DATA) $$i $(DESTDIR)$(infodir)/$$i; \
+@@ -226,21 +225,22 @@
+ 	rm -f config.cache config.h config.status config.log Makefile
+ maintainer-clean: distclean
+ 
+-
+-$(DESTDIR)$(bindir)/floppyd: floppyd
++installdirs:
+ 	$(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir)
++	$(top_srcdir)/mkinstalldirs $(MAN1DIR)
++	$(top_srcdir)/mkinstalldirs $(MAN5DIR)
++	$(top_srcdir)/mkinstalldirs $(DESTDIR)$(infodir)
++
++$(DESTDIR)$(bindir)/floppyd: floppyd installdirs
+ 	$(INSTALL_PROGRAM) floppyd $(DESTDIR)$(bindir)/floppyd
+ 
+-$(DESTDIR)$(bindir)/floppyd_installtest: floppyd_installtest
+-	$(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir)
++$(DESTDIR)$(bindir)/floppyd_installtest: floppyd_installtest installdirs
+ 	$(INSTALL_PROGRAM) floppyd_installtest $(DESTDIR)$(bindir)/floppyd_installtest
+ 
+-$(DESTDIR)$(bindir)/mtools: mtools
+-	$(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir)
++$(DESTDIR)$(bindir)/mtools: mtools installdirs
+ 	$(INSTALL_PROGRAM) mtools $(DESTDIR)$(bindir)/mtools
+ 
+-$(DESTDIR)$(bindir)/mkmanifest: mkmanifest
+-	$(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir)
++$(DESTDIR)$(bindir)/mkmanifest: mkmanifest installdirs
+ 	$(INSTALL_PROGRAM) mkmanifest $(DESTDIR)$(bindir)/mkmanifest
+ 
+ #$(ETCDIR)/mtools: mtools.etc
+@@ -255,7 +254,6 @@
+ 
+ ## "z" is the older version of "gz"; the name is just *too* short
+ install-scripts: $(DESTDIR)$(bindir)/mtools
+-	@$(top_srcdir)/mkinstalldirs $(DESTDIR)$(bindir)
+ 	@for j in $(SCRIPTS) ; do \
+ 		$(INSTALL_PROGRAM) $(srcdir)/scripts/$$j $(DESTDIR)$(bindir)/$$j ; \
+ 		echo $(DESTDIR)$(bindir)/$$j ; \
+@@ -263,8 +261,7 @@
+ 	rm -f $(DESTDIR)$(bindir)/lz
+ 	$(LN_S) uz $(DESTDIR)$(bindir)/lz
+ 
+-install-man:
+-	@$(top_srcdir)/mkinstalldirs $(MAN1DIR)
++install-man: installdirs
+ 	@for j in $(MAN1); do \
+ 		$(INSTALL_DATA) $(srcdir)/$$j $(MAN1DIR)/$$j ; \
+ 		echo $(MAN1DIR)/$$j ; \
