@@ -1,12 +1,12 @@
 Summary:	Programs to access DOS disks w/o mounting them
 Name:		mtools
-Version:	4.0.17
+Version:	4.0.18
 Release:	1
 License:	GPL
 Group:		Applications/File
 #Source0Download: http://mtools.linux.lu/download.html
 Source0:	http://mtools.linux.lu/%{name}-%{version}.tar.bz2
-# Source0-md5:	6c63d4bb63f1881f194c24ab0c85cf02
+# Source0-md5:	a23646617546bf6ad56f061d8b283c85
 Source1:	%{name}.conf
 Patch0:		%{name}-pmake.patch
 URL:		http://mtools.linux.lu/
