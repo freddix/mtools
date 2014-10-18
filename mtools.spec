@@ -1,7 +1,8 @@
+# based on PLD Linux spec git://git.pld-linux.org/packages/mtools.git
 Summary:	Programs to access DOS disks w/o mounting them
 Name:		mtools
 Version:	4.0.18
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/File
 #Source0Download: http://mtools.linux.lu/download.html
